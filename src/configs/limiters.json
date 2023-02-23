@@ -1,0 +1,68 @@
+{
+    "maxLevel": 15,
+    "maxAttrLevel": {
+        "rockman": 10,
+        "human": 10,
+        "vampire": 14
+    },
+    "xpTable": [
+        400,
+        441,
+        484,
+        529,
+        576,
+        625,
+        676,
+        729,
+        784,
+        841,
+        900,
+        961,
+        1024,
+        1089,
+        0
+    ],
+    "fightingStyleAdvantages": {
+        "hamon": [
+            ["force", "constituition"],
+            ["athletics", "strengh"]
+        ],
+        "spin": [
+            ["aim", "dexterity"],
+            ["math", "education"]
+        ],
+        "fencing": [
+            ["dodge", "dexterity"],
+            ["reflex", "dexterity"]
+        ],
+        "shooter": [
+            ["aim", "dexterity"],
+            ["mindResistence", "mentality"]
+        ],
+        "fighter": [
+            ["fight", "strengh"],
+            ["painResistence", "constituition"]
+        ],
+        "none": []
+    },
+
+    "racesAdvantages": {
+        "human": [
+            ["education", 1],
+            ["social", 1]
+        ],
+        "vampire": [
+            ["strengh", 1],
+            ["constituition", 1]
+        ],
+        "rockman": [
+            ["mentality", 1],
+            ["dexterity", 1]
+        ],
+        "animal": [
+            ["mentality", 2],
+            ["constituition", 1],
+            ["education", -2]
+        ]
+    }
+}
