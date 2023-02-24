@@ -7,6 +7,7 @@ const masterAuth = require('../middlewares/masterAuth')
 /* DATABASE */
 const Player = require('../db/schemas/PlayerSchema')
 const Character = require('../db/schemas/CharacterSchema')
+const Stand = require('../db/schemas/StandSchema')
 
 /* FUNÇÕES */
 const { sendStatus } = require('../functions')
@@ -25,13 +26,17 @@ router.post('/', masterAuth, async (req, res) => {
 })
 
 router.delete('/', masterAuth, async (req, res) => {
-    await Character.findByIdAndRemove(req.query.id)
-    let { charList } = await Player.findById(req.id)
-    charList = charList.filter(id => id !== req.query.id)
-    console.log(charList)
-    
-    await Player.findByIdAndUpdate(req.query.id, { charList })
-    return res.json(sendStatus(1))
+    try {
+        await Character.findByIdAndRemove(req.query.id)
+        await Stand.deleteOne({ charId: req.query.id })
+        let { charList } = await Player.findById(req.id)
+        charList = charList.filter(id => id.toString() !== req.query.id)
+        
+        await Player.findByIdAndUpdate(req.id, { charList })
+        return res.json(sendStatus(1))
+    } catch (e) {
+        return res.json(sendStatus(0))
+    }
 })
 
 router.get('/', masterAuth, async (req, res) => {
