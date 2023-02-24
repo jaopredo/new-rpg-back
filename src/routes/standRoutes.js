@@ -1,11 +1,9 @@
 const router = require('express').Router()
-const { maxLevel, xpTable } = require('../configs/limiters.json')
 
 /* MIDDLEWARES */
 const masterAuth = require('../middlewares/masterAuth')
 
 /* DATABASE */
-const Player = require('../db/schemas/PlayerSchema')
 const Stand = require('../db/schemas/StandSchema')
 
 /* FUNÇÕES */
