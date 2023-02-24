@@ -8,6 +8,16 @@ const {
     calcMovement
 } = require('./charCombat')
 
+const {
+    calcMove,
+    calcAPR,
+    calcBonus,
+    calcShield,
+    calcStandJump,
+    calcRange,
+    calcDamage,
+} = require('./standCombat')
+
 module.exports = {
     sendStatus: (sts, msg) => ({
         error: !sts,
@@ -64,5 +74,16 @@ module.exports = {
             da: successDifficult,
             shield: 0
         }
-    }
+    },
+    makeStandCombatObject: (attributes) => ({
+        damage: calcDamage(attributes.strengh),
+        shield: calcShield(attributes.durability),
+        bonus: calcBonus(attributes.precision),
+    }),
+    makeStandMoveObject: (attributes) => ({
+        range: `${calcRange(attributes.range)}m`,
+        apr: calcAPR(attributes.speed),
+        movement: `${calcMove(attributes.speed)}m`,
+        standJump: `${calcStandJump(attributes.strengh)}m`
+    })
 }

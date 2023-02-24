@@ -13,27 +13,40 @@ const { sendStatus } = require('../functions')
 
 router.post('/', masterAuth, async (req, res) => {
     try {
-        const character = await Character.create(req.body)
-        await Player.findByIdAndUpdate(req.id, { $push: { charList: character._id } })
-        return res.json(sendStatus(1))
+        if (await Player.findById(req.id)) {
+            const character = await Character.create(req.body)
+            await Player.findByIdAndUpdate(req.id, { $push: { charList: character.id } })
+            return res.json(sendStatus(1))
+        }
+        return res.json(sendStatus(0))
     } catch (e) {
         return res.json(sendStatus(0))
     }
 })
 
 router.delete('/', masterAuth, async (req, res) => {
-    try {
-        await Character.findByIdAndRemove(req.body.charId)
-        return res.json(sendStatus(1))
-    } catch (e) {
-        return res.json(sendStatus(0))
-    }
+    await Character.findByIdAndRemove(req.query.id)
+    let { charList } = await Player.findById(req.id)
+    charList = charList.filter(id => id !== req.query.id)
+    console.log(charList)
+    
+    await Player.findByIdAndUpdate(req.query.id, { charList })
+    return res.json(sendStatus(1))
 })
 
 router.get('/', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.body.charId)
-        return res.json(character)
+        const { charList } = await Player.findById(req.id)
+        const { id } = req.query
+
+        if (!id) {
+            return res.json(charList)
+        }
+        if (charList.includes(id)) {
+            const character = await Character.findById(id)
+            return res.json(character)
+        }
+        return res.json(sendStatus(0, "Esse personagem não é seu ou ele não foi encontrado!"))
     } catch (e) {
         return res.json(sendStatus(0))
     }
@@ -43,11 +56,11 @@ router.get('/', masterAuth, async (req, res) => {
 /* ALTERAR VIDA */
 router.patch('/life', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.body.charId)
+        const { combat } = await Character.findById(req.query.id)
         
-        character.combat.actualLife = req.body.life
+        combat.actualLife = req.body.life
         
-        await Character.findByIdAndUpdate(req.body.charId, character)
+        await Character.findByIdAndUpdate(req.query.id, { combat })
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
@@ -57,11 +70,11 @@ router.patch('/life', masterAuth, async (req, res) => {
 /* ALTERAR ENERGIA MENTAL */
 router.patch('/mentalEnergy', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.body.charId)
+        const character = await Character.findById(req.query.id)
         
         character.combat.actualMentalEnergy = req.body.mentalEnergy
         
-        await Character.findByIdAndUpdate(req.body.charId, character)
+        await Character.findByIdAndUpdate(req.query.id, character)
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
@@ -71,10 +84,10 @@ router.patch('/mentalEnergy', masterAuth, async (req, res) => {
 /* MÉTODOS PARA ATUALIZAR PERSONAGENS */
 router.patch('/saveXP', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.body.charId)
+        const character = await Character.findById(req.query.id)
         if (character.level.actualXP !== req.body.actualXP) character.level.actualXP = req.body.actualXP
 
-        await Character.findByIdAndUpdate(req.body.charId, character)
+        await Character.findByIdAndUpdate(req.query.id, character)
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
@@ -84,7 +97,7 @@ router.patch('/saveXP', masterAuth, async (req, res) => {
 router.patch('/levelUp', masterAuth, async (req, res) => {
     try {
         // Se o player existe no database, pego o meu Personagem
-        const character = await Character.findById(req.body.charId)
+        const character = await Character.findById(req.query.id)
 
         /* ALTERANDO O NÍVEL DO PERSONAGEM */
         const { level } = character
@@ -103,7 +116,7 @@ router.patch('/levelUp', masterAuth, async (req, res) => {
             character.specialitys[req.body.obj.label][req.body.obj.spec] = true 
         }
 
-        await Character.findByIdAndUpdate(req.body.charId, character)
+        await Character.findByIdAndUpdate(req.query.id, character)
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))

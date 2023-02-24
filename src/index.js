@@ -11,5 +11,6 @@ app.use(express.urlencoded({ extended: true }))
 
 require('./routes/playerRoutes')(app)
 require('./routes/characterRoutes')(app)
+require('./routes/standRoutes')(app)
 
 app.listen(process.env.PORT || 3030)
