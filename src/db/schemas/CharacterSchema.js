@@ -107,7 +107,7 @@ CharacterSchema.pre('save', function(next) {
     this.combat = makeCombatObject(attributes, specialitys, 'player')
     next()
 })
-CharacterSchema.pre('updateOne', async function(next) {
+CharacterSchema.pre('findOneAndUpdate', async function(next) {
     // const thisChar = await this.model.findOne(this.getQuery());
     const updateObj = this.getUpdate()  // Pego as informações novas
 
