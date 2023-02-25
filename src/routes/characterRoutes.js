@@ -8,6 +8,7 @@ const masterAuth = require('../middlewares/masterAuth')
 const Player = require('../db/schemas/PlayerSchema')
 const Character = require('../db/schemas/CharacterSchema')
 const Stand = require('../db/schemas/StandSchema')
+const Inventory = require('../db/schemas/InventorySchema')
 
 /* FUNÇÕES */
 const { sendStatus } = require('../functions')
@@ -17,6 +18,7 @@ router.post('/', masterAuth, async (req, res) => {
         if (await Player.findById(req.id)) {
             const character = await Character.create(req.body)
             await Player.findByIdAndUpdate(req.id, { $push: { charList: character.id } })
+            await Inventory.create({ charId: character._id })
             return res.json(sendStatus(1))
         }
         return res.json(sendStatus(0))

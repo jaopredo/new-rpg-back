@@ -13,5 +13,6 @@ require('./routes/playerRoutes')(app)
 require('./routes/characterRoutes')(app)
 require('./routes/standRoutes')(app)
 require('./routes/subStandRoutes')(app)
+require('./routes/inventoryRoutes')(app)
 
 app.listen(process.env.PORT || 3030)
