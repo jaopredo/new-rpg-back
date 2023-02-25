@@ -1,10 +1,5 @@
 {
     "maxLevel": 15,
-    "maxAttrLevel": {
-        "rockman": 10,
-        "human": 10,
-        "vampire": 14
-    },
     "xpTable": [
         400,
         441,
@@ -22,6 +17,7 @@
         1089,
         0
     ],
+
     "fightingStyleAdvantages": {
         "hamon": [
             ["force", "constituition"],
@@ -45,6 +41,29 @@
         ],
         "none": []
     },
+    "fightingStyleAbilitys": {
+        "hamon": [
+            { "name": "Ativação", "description": "Você pode cobrir seu corpo de hamóm por 2 rodadas. Para usar essa habilidade, gasta sua ação padrão. Isso faz com que você, ao socar seu  dano aumenta em 1D6, além de ganhar +1 de armadura" },
+            { "name": "Sunlight Yellow Overdrive", "description": "Uma sequência de  socos fortes carregados de hamon. Rola-se 1d20 de Dano. Leva 2 rodadas para usar novamente" }
+        ],
+        "spin": [
+            { "name": "Pele Endurecida", "description": "Ao usar a steel ball direto na própria pele, é capaz de endurecer a pele ao ponto de ela se tornar uma pequena armadura, te tornando mais resistente. +1 de armadura" },
+            { "name": "Steel Ball", "description": "A arma da família Zeppelli. Ao utiliza uma steel ball com Spin, ela causa 1d8 de dano" }
+        ],
+        "fencing": [
+            { "name": "Esquiva Perfeita", "description": "Na sua rodada, você pode dizer que vai ativar esta habilidade. Ela dura apenas 1 rodada e leva 6 rodadas para ser usada novamente. Enquanto ela estiver ativa, os dois primeiros ataques lançados sobre seu personagem, irão ser anulados. Como consequência, se tentarem atacar seu personagem novamente, o primeiro ataque irá acertar você independente da situação" },
+            { "name": "Precisão Letal", "description": "Seu personagem usa todo seu potencial para se concentrar na batalha e ficar 100% focado. Essa habilidade lhe da vantagem em todos os testes de ataque por 2 rodadas. Leva 4 rodadas para ser usada novamente" }
+        ],
+        "shooter": [
+            { "name": "Mira Perfeita", "description": "Recebe +5 em testes com armas de fogo ou lançamento de projéteis" },
+            { "name": "Veterano", "description": "Pode tirar 5 do valor total rolado no dado para adicionar no valor da rolagem de dano" }
+        ],
+        "fighter": [
+            { "name": "Barragem", "description": "Você aperfeiçoou seu corpo ao ponto de poder dar vários socos sequenciais. 1d12 de dano. 3 rodadas para recarregar" },
+            { "name": "Soco Potente", "description": "Seu soco é muito mais forte do que um humano comum, seu soco causa 1d6 de dano mais seu atributo de Força" }
+        ],
+        "none": []
+    },
 
     "racesAdvantages": {
         "human": [
@@ -64,5 +83,106 @@
             ["constituition", 1],
             ["education", -2]
         ]
-    }
+    },
+    "racesAbilitys": {
+        "animal": [],
+        "human": [],
+        "vampire": [
+            { "name": "Recuperar Vida", "description": "A cada rodada em um combate, o vampiro recupera 2 de vida" },
+            { "name": "Sugar Sangue", "description": "Ao sugar sangue, fora do combate, um vampiro recupera sua vida totalmente, dentro do combate, ele aumenta sua taxa de recuperação de 2 de vida por rodada, para 3 de vida por rodada" },
+            { "name": "Restauração Total", "description": "Se o vampiro tiver perdido algum membro em batalha, ou possuir pouca vida, depois de 3 horas, sua vida é totalmente recuperada e seu membro é restaurado" }
+        ],
+        "rockman": [
+            { "name": "Endurecimento", "description": "Você poderá se transformar parcialmente em pedra, reduzindo metade do dano que você irá receber, a transformação dura 3 rodadas, você fica incapacitado de atacar por 1 rodada" },
+            { "name": "Hibernação", "description": "Ao virar pedra, você fica por até 1 dia hibernando, e não se move, você recupera toda sua vida, mas seus membros perdidos não crescem de novo" }
+        ]
+    },
+    "racesMaxAttr": {
+        "rockman": 10,
+        "human": 10,
+        "vampire": 14,
+        "animal": 12
+    },
+
+    "charAttributes": [
+        { "label": "Força", "id": "strengh" },
+        { "label": "Destreza", "id": "dexterity" },
+        { "label": "Constituição", "id": "constituition" },
+        { "label": "Educação", "id": "education" },
+        { "label": "Mentalidade", "id": "mentality" },
+        { "label": "Social", "id": "social" }
+    ],
+    "charSpecialitys": {
+        "strengh": [
+            { "id": "athletics", "label": "Atletismo", "area": "strengh" },
+            { "id": "jump", "label": "Salto", "area": "strengh" },
+            { "id": "fight", "label": "Briga", "area": "strengh" },
+            { "id": "climb", "label": "Escalar", "area": "strengh" }
+        ],
+
+        "dexterity": [
+            { "id": "acrobacy", "label": "Acrobacia", "area": "dexterity" },
+            { "id": "stealth", "label": "Furtividade", "area": "dexterity" },
+            { "id": "aim", "label": "Mira", "area": "dexterity" },
+            { "id": "dodge", "label": "Esquiva", "area": "dexterity" },
+            { "id": "reflex", "label": "Reflexo", "area": "dexterity" }
+        ],
+
+        "constituition": [
+            { "id": "force", "label": "Vigor", "area": "constituition" },
+            { "id": "imunity", "label": "Imunidade", "area": "constituition" },
+            { "id": "painResistence", "label": "Resistência a Dor", "area": "constituition" }
+        ],
+
+        "education": [
+            { "id": "history", "label": "História", "area": "education" },
+            { "id": "geography", "label": "Geografia", "area": "education" },
+            { "id": "math", "label": "Matemática", "area": "education" },
+            { "id": "investigation", "label": "Investigação", "area": "education" },
+            { "id": "forensic", "label": "Forense", "area": "education" },
+            { "id": "sociology", "label": "Sociologia", "area": "education" },
+            { "id": "tecnology", "label": "T.I", "area": "education" },
+            { "id": "art", "label": "Arte", "area": "education" },
+            { "id": "physics", "label": "Física", "area": "education" },
+            { "id": "chemistry", "label": "Química", "area": "education" },
+            { "id": "foreignLanguage", "label": "Língua Estrangeira", "area": "education" },
+            { "id": "programming", "label": "Programação", "area": "education" },
+            { "id": "policy", "label": "Política", "area": "education" },
+            { "id": "religion", "label": "Religião", "area": "education" },
+            { "id": "mechanic", "label": "Mecânico", "area": "education" },
+            { "id": "biology", "label": "Biologia", "area": "education" },
+            { "id": "medicine", "label": "Medicina", "area": "education" }
+        ],
+
+        "mentality": [
+            { "id": "mindResistence", "label": "Resistência Psicológica", "area": "mentality" },
+            { "id": "perception", "label": "Percepção", "area": "mentality" },
+            { "id": "insight", "label": "Intuição", "area": "mentality" }
+        ],
+
+        "social": [
+            { "id": "intimidation", "label": "Intimidação", "area": "social" },
+            { "id": "cheating", "label": "Enganação", "area": "social" },
+            { "id": "acting", "label": "Atuação", "area": "social" },
+            { "id": "charm", "label": "Charme", "area": "social" },
+            { "id": "sexy", "label": "Seduzir", "area": "social" },
+            { "id": "persuasion", "label": "Persuasão", "area": "social" }
+        ]
+    },
+
+    "standAttributes": [
+        { "label": "Força", "id": "strengh" },
+        { "label": "Velocidade", "id": "speed" },
+        { "label": "Resistência", "id": "durability" },
+        { "label": "Precisão", "id": "precision" },
+        { "label": "Alcance", "id": "range" }
+    ],
+    "standPDAbilitys": [
+        {},
+        { "passive": true },
+        { "firstMain": true },
+        { "firstMain": true, "secondMain": true },
+        { "firstMain": true, "secondMain": true, "passive": true },
+        { "firstMain": true, "secondMain": true, "passive": true, "substand": true }
+    ]
 }

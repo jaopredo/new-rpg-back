@@ -1,8 +1,5 @@
 const router = require('express').Router()
 
-/* MIDDLEWARES */
-const masterAuth = require('../middlewares/masterAuth')
-
 /* DATABASE */
 const Player = require('../db/schemas/PlayerSchema')
 
