@@ -52,6 +52,7 @@ const StandSchema = new mongoose.Schema({
     },
     acts: {
         act1: {
+            img: String,
             attributes: {
                 strengh: { type: Number, min: 0, max: 5 },
                 speed: { type: Number, min: 0, max: 5 },
@@ -78,6 +79,7 @@ const StandSchema = new mongoose.Schema({
             },
         },
         act2: {
+            img: String,
             attributes: {
                 strengh: { type: Number, min: 0, max: 5 },
                 speed: { type: Number, min: 0, max: 5 },
@@ -104,6 +106,7 @@ const StandSchema = new mongoose.Schema({
             },
         },
         act3: {
+            img: String,
             attributes: {
                 strengh: { type: Number, min: 0, max: 5 },
                 speed: { type: Number, min: 0, max: 5 },
@@ -130,6 +133,7 @@ const StandSchema = new mongoose.Schema({
             },
         },
         act4: {
+            img: String,
             attributes: {
                 strengh: { type: Number, min: 0, max: 5 },
                 speed: { type: Number, min: 0, max: 5 },

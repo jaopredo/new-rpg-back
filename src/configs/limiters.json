@@ -175,7 +175,8 @@
         { "label": "Velocidade", "id": "speed" },
         { "label": "Resistência", "id": "durability" },
         { "label": "Precisão", "id": "precision" },
-        { "label": "Alcance", "id": "range" }
+        { "label": "Alcance", "id": "range" },
+        { "label": "PD", "id": "development" }
     ],
     "standPDAbilitys": [
         {},

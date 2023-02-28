@@ -7,6 +7,7 @@ const configs = require('../../configs/limiters.json')
 /* Schema do Personagem */
 const CharacterSchema = new mongoose.Schema({
     playerId: mongoose.Schema.Types.ObjectId,
+    img: String,
     basic: {
         name: { type: String, required: true },
         age: { type: Number, required: true, min: 20 },
