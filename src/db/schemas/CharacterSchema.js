@@ -113,8 +113,8 @@ CharacterSchema.pre('findOneAndUpdate', async function(next) {
     const updateObj = this.getUpdate()  // Pego as informações novas
 
     // Separando atributos e especialidades
-    const { attributes, specialitys } = updateObj
-    if (attributes || specialitys) {
+    const { attributes, specialitys, save } = updateObj
+    if ((attributes || specialitys) && !save) {
         this.set({  // Coloco o novo objeto dentro do Schema a ser salvo
             combat: makeCombatObject(attributes, specialitys, 'player')
         })

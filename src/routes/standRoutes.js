@@ -11,8 +11,11 @@ const { sendStatus } = require('../functions')
 
 router.post('/', masterAuth, async (req, res) => {
     try {
-        await Stand.create(req.body)
-        return res.json(sendStatus(1))
+        const stand = await Stand.create(req.body)
+        return res.json({
+            ...sendStatus(1),
+            standId: stand._id
+        })
     } catch (e) {
         return res.json(sendStatus(0))
     }

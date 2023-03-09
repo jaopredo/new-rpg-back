@@ -19,7 +19,10 @@ router.post('/', masterAuth, async (req, res) => {
             const character = await Character.create(req.body)
             await Player.findByIdAndUpdate(req.id, { $push: { charList: character.id } })
             await Inventory.create({ charId: character._id })
-            return res.json(sendStatus(1))
+            return res.json({
+                ...sendStatus(1),
+                charId: character._id
+            })
         }
         return res.json(sendStatus(0))
     } catch (e) {
@@ -65,9 +68,10 @@ router.patch('/life', masterAuth, async (req, res) => {
     try {
         const { combat } = await Character.findById(req.query.id)
         
-        combat.actualLife = req.body.life
+        if (combat.actualLife != req.body.life) combat.actualLife = req.body.life
         
-        await Character.findByIdAndUpdate(req.query.id, { combat })
+        await Character.findByIdAndUpdate(req.query.id, { combat, save: true })
+
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
@@ -77,11 +81,11 @@ router.patch('/life', masterAuth, async (req, res) => {
 /* ALTERAR ENERGIA MENTAL */
 router.patch('/mentalEnergy', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.query.id)
+        const { combat } = await Character.findById(req.query.id)
         
-        character.combat.actualMentalEnergy = req.body.mentalEnergy
+        combat.actualMentalEnergy = req.body.mentalEnergy
         
-        await Character.findByIdAndUpdate(req.query.id, character)
+        await Character.findByIdAndUpdate(req.query.id, { combat, save: true })
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
@@ -91,10 +95,10 @@ router.patch('/mentalEnergy', masterAuth, async (req, res) => {
 /* MÉTODOS PARA ATUALIZAR PERSONAGENS */
 router.patch('/saveXP', masterAuth, async (req, res) => {
     try {
-        const character = await Character.findById(req.query.id)
-        if (character.level.actualXP !== req.body.actualXP) character.level.actualXP = req.body.actualXP
+        const { level } = await Character.findById(req.query.id)
+        if (level.actualXP !== req.body.actualXP) level.actualXP = req.body.actualXP
 
-        await Character.findByIdAndUpdate(req.query.id, character)
+        await Character.findByIdAndUpdate(req.query.id, { level, save: true })
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
