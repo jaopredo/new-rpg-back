@@ -22,8 +22,9 @@ router.get('/', masterAuth, async (req, res) => {
 router.put('/item', masterAuth,  async (req, res) => {
     try {
         const { charId } = req.query
-        await Inventory.updateOne({ charId }, { $push: { items: req.body } });
-        return res.json(sendStatus(1));
+        await Inventory.updateOne({ charId }, { $push: { items: req.body } })
+        const inventory = await Inventory.findOne({ charId: req.query.charId })
+        return res.json(inventory)
     } catch (e) {
         return res.json(sendStatus(0))
     }
@@ -35,8 +36,10 @@ router.delete('/item', masterAuth, async (req, res) => {
         const { itemId, charId } = req.query;
 
         await Inventory.updateOne({ charId }, { $pull: { items: { _id: itemId } } })
+
+        const inventory = await Inventory.findOne({ charId: req.query.charId })
         
-        return res.json(sendStatus(1));
+        return res.json(inventory)
     } catch (e) {
         return res.json(sendStatus(0))
     }
