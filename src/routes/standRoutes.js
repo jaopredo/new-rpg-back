@@ -30,4 +30,15 @@ router.get('/', masterAuth, async (req, res) => {
     }
 })
 
+router.patch('/image', masterAuth, async (req, res) => {
+    try {
+        const { basic } = await Stand.findById(req.query.standId)
+        basic.img = req.body.img
+        await Stand.findByIdAndUpdate(req.query.standId, { basic })
+        return res.json(sendStatus(1))
+    } catch (e) {
+        return res.json(sendStatus(0))
+    }
+})
+
 module.exports = app => app.use('/stand', router)

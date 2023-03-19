@@ -4,6 +4,7 @@ const router = require('express').Router()
 const Player = require('../db/schemas/PlayerSchema')
 
 /* FUNÇÕES */
+const masterAuth = require('../middlewares/masterAuth')
 const { sendStatus, generateToken } = require('../functions')
 
 router.post('/register', async (req, res) => {
@@ -34,6 +35,18 @@ router.post('/login', async (req, res) => {
             return res.json({token: generateToken({ id: player.id })})
         }
         return res.json(sendStatus(0, "A senha está incorreta!"))
+    } catch (e) {
+        return res.json(sendStatus(0))
+    }
+})
+
+router.get('/name', masterAuth, async (req, res) => {
+    try {
+        const player = await Player.findById(req.id).select("+password")
+        if (!player) {
+            return res.json(sendStatus(0, "Esse email não está no banco"))
+        }
+        return res.json(player.name)
     } catch (e) {
         return res.json(sendStatus(0))
     }

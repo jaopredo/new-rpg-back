@@ -20,24 +20,24 @@
 
     "fightingStyleAdvantages": {
         "hamon": [
-            ["force", "constituition"],
-            ["athletics", "strengh"]
+            { "spec": "force", "label": "constituition" },
+            { "spec": "athletics", "label": "strengh" }
         ],
         "spin": [
-            ["aim", "dexterity"],
-            ["math", "education"]
+            { "spec": "aim", "label": "dexterity" },
+            { "spec": "math", "label": "education" }
         ],
         "fencing": [
-            ["dodge", "dexterity"],
-            ["reflex", "dexterity"]
+            { "spec": "dodge", "label": "dexterity" },
+            { "spec": "reflex", "label": "dexterity" }
         ],
         "shooter": [
-            ["aim", "dexterity"],
-            ["mindResistence", "mentality"]
+            { "spec": "aim", "label": "dexterity" },
+            { "spec": "mindResistence", "label": "mentality" }
         ],
         "fighter": [
-            ["fight", "strengh"],
-            ["painResistence", "constituition"]
+            { "spec": "fight", "label": "strengh" },
+            { "spec": "painResistence", "label": "constituition" }
         ],
         "none": []
     },
@@ -67,21 +67,21 @@
 
     "racesAdvantages": {
         "human": [
-            ["education", 1],
-            ["social", 1]
+            { "attr": "education", "value": 1},
+            { "attr": "social", "value": 1}
         ],
         "vampire": [
-            ["strengh", 1],
-            ["constituition", 1]
+            { "attr": "strengh", "value": 1},
+            { "attr": "constituition", "value": 1}
         ],
         "rockman": [
-            ["mentality", 1],
-            ["dexterity", 1]
+            { "attr": "mentality", "value": 1},
+            { "attr": "education", "value": 1}
         ],
         "animal": [
-            ["mentality", 2],
-            ["constituition", 1],
-            ["education", -2]
+            { "attr": "mentality", "value": 2},
+            { "attr": "constituition", "value": 1},
+            { "attr": "education", "value": -2}
         ]
     },
     "racesAbilitys": {

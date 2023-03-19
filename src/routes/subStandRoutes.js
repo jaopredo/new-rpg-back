@@ -27,4 +27,15 @@ router.get('/', masterAuth, async (req, res) => {
     }
 })
 
+router.patch('/image', masterAuth, async (req, res) => {
+    try {
+        const { basic } = await SubStand.findById(req.query.substandId)
+        basic.img = req.body.img
+        await SubStand.findByIdAndUpdate(req.query.substandId, { basic })
+        return res.json(sendStatus(1))
+    } catch (e) {
+        return res.json(sendStatus(0))
+    }
+})
+
 module.exports = app => app.use('/substand', router)

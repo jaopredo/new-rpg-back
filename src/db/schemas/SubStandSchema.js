@@ -7,11 +7,12 @@ const { makeStandCombatObject, makeStandMoveObject } = require('../../functions'
 // Basic, attributes, abilitys vão ser passados pela requisição, o resto vai ser feito automático
 const SubStandSchema = new mongoose.Schema({
     playerId: mongoose.Types.ObjectId,
-    img: String,
+    charId: mongoose.Types.ObjectId,
     basic: {
         name: { type: String, required: true },
         standType: { type: String, required: true },
         weakPoint: { type: String, required: true, default: "Nenhum" },
+        img: String,
     },
     attributes: {
         strengh: { type: Number, min: 0, max: 5 },

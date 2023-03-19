@@ -13,6 +13,16 @@ const Inventory = require('../db/schemas/InventorySchema')
 /* FUNÇÕES */
 const { sendStatus } = require('../functions')
 
+// router.post('/old', masterAuth, async(req, res) => {
+//     try {
+
+
+//         return res.json(sendStatus(0))
+//     } catch (e) {
+//         return res.json(sendStatus(0))
+//     }
+// })
+
 router.post('/', masterAuth, async (req, res) => {
     try {
         if (await Player.findById(req.id)) {
@@ -128,6 +138,16 @@ router.patch('/levelUp', masterAuth, async (req, res) => {
         }
 
         await Character.findByIdAndUpdate(req.query.id, character)
+        return res.json(sendStatus(1))
+    } catch (e) {
+        return res.json(sendStatus(0))
+    }
+})
+
+
+router.patch('/image', masterAuth, async (req, res) => {
+    try {
+        await Character.findByIdAndUpdate(req.query.charId, { img: req.body.img })
         return res.json(sendStatus(1))
     } catch (e) {
         return res.json(sendStatus(0))
